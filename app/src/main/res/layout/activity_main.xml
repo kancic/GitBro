@@ -39,9 +39,15 @@
             android:id="@+id/recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:orientation="vertical"
+            app:itemList="@{viewModel.repositoryList}"
+            app:itemResourceId="@{@layout/item_repository}"
+            app:itemVariableId="@{viewModel.repositoryVariableId}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_input" />
+            app:layout_constraintTop_toBottomOf="@id/search_input"
+            tools:listitem="@layout/item_repository" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
