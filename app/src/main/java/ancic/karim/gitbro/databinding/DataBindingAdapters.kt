@@ -1,8 +1,15 @@
 package ancic.karim.gitbro.databinding
 
+import ancic.karim.gitbro.image.ImageManager
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+
+@BindingAdapter(value = ["imageUrl", "imageCircle"], requireAll = false)
+fun setImageUrl(imageView: ImageView, url: String?, circle: Boolean = false) {
+    ImageManager.with(imageView.context).load(url).setCircle(circle).into(imageView)
+}
 
 @BindingAdapter(
     value = ["itemVariableId", "itemSelectedVariableId", "itemSelectedPosition", "itemList", "itemResourceId", "itemOnClick"],
