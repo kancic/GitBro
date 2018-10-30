@@ -5,3 +5,6 @@ import androidx.databinding.BindingConversion
 
 @BindingConversion
 fun convertBooleanToVisibility(visible: Boolean) = if (visible) View.VISIBLE else View.GONE
+
+@BindingConversion
+fun convertIntToDouble(integer: Int?) = integer?.toDouble()
