@@ -18,6 +18,10 @@ class MainRepository : BaseRepository() {
             override fun getResponseFromNetwork(data: SearchRepositoriesResponse?): List<Repository>? {
                 return data?.repositoryList
             }
+
+            override fun getRequestDelayInMillis(): Long {
+                return 1000
+            }
         })
     }
 }
