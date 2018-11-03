@@ -9,10 +9,10 @@ import androidx.lifecycle.LiveData
 import retrofit2.Call
 
 class MainRepository : BaseRepository() {
-    fun getRepositoryList(searchText: String?): LiveData<List<Repository>?> {
+    fun getRepositoryList(searchText: String?, sortText: String?): LiveData<List<Repository>?> {
         return executeNetworkRequest(object : NetworkRequest<List<Repository>, SearchRepositoriesResponse> {
             override fun getNetworkCall(): Call<SearchRepositoriesResponse> {
-                return ApiManager.getInstance().service.searchRepositories(searchText)
+                return ApiManager.getInstance().service.searchRepositories(searchText, sortText)
             }
 
             override fun getResponseFromNetwork(data: SearchRepositoriesResponse?): List<Repository>? {

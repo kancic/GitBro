@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("/search/repositories")
-    fun searchRepositories(@Query("q") searchText: String?): Call<SearchRepositoriesResponse>
+    fun searchRepositories(@Query("q") searchText: String?, @Query("sort") sortText: String?): Call<SearchRepositoriesResponse>
 }

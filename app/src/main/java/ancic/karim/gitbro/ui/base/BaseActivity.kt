@@ -3,6 +3,7 @@ package ancic.karim.gitbro.ui.base
 import ancic.karim.gitbro.BR
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -16,6 +17,7 @@ abstract class BaseActivity<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
 
     protected abstract fun provideViewResourceId(): Int
     protected abstract fun provideViewModelClass(): Class<VIEW_MODEL>
+    protected open fun provideOptionsMenuResourceId() = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,5 +29,14 @@ abstract class BaseActivity<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
             binding.setVariable(BR.viewModel, viewModel)
             binding.setLifecycleOwner(activity)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        if (provideOptionsMenuResourceId() != 0) {
+            val inflater = menuInflater
+            inflater.inflate(provideOptionsMenuResourceId(), menu)
+        }
+        return true
     }
 }

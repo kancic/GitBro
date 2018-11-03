@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">GitBro</string>
     <string name="label_search">Search</string>
+    <string name="action_sort">Sort</string>
+    <string name="action_sort_default">Default</string>
+    <string name="action_sort_by_stars">Stars</string>
+    <string name="action_sort_by_forks">Forks</string>
+    <string name="action_sort_by_updated">Updated</string>
 </resources>
