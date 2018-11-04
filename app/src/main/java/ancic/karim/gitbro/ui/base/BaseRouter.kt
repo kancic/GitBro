@@ -1,5 +1,9 @@
 package ancic.karim.gitbro.ui.base
 
-open class BaseRouter {
+import androidx.lifecycle.LifecycleOwner
 
+open class BaseRouter {
+    open fun observe(view: LifecycleOwner) {
+
+    }
 }

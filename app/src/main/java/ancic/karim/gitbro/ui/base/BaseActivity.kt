@@ -23,6 +23,7 @@ abstract class BaseActivity<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProviders.of(activity).get(provideViewModelClass())
+        viewModel.router.observe(this)
 
         if (provideViewResourceId() != 0) {
             binding = DataBindingUtil.setContentView(activity, provideViewResourceId())
