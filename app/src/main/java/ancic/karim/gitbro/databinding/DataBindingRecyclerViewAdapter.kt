@@ -45,8 +45,12 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE>(
         onBindItem(holder, item, position)
     }
 
-    protected fun onPreBindItem(item: ITEM_TYPE): ITEM_TYPE {
+    protected open fun onPreBindItem(item: ITEM_TYPE): ITEM_TYPE {
         return item
+    }
+
+    protected open fun onBindItem(holder: BindingHolder<BINDING>, item: ITEM_TYPE, position: Int) {
+
     }
 
     protected fun onItemClickListener(holder: BindingHolder<BINDING>, item: ITEM_TYPE): View.OnClickListener {
@@ -64,10 +68,6 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE>(
                 onItemClick(holder.binding, item, position)
             }
         }
-    }
-
-    protected fun onBindItem(holder: BindingHolder<BINDING>, item: ITEM_TYPE, position: Int) {
-
     }
 
     override fun getItemCount(): Int {
