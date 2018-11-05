@@ -28,23 +28,25 @@ fun setImageUrl(imageView: ImageView, url: String?, circle: Boolean = false) {
 }
 
 @BindingAdapter(
-    value = ["itemVariableId", "itemSelectedVariableId", "itemSelectedPosition", "itemList", "itemResourceId", "itemOnClick"],
+    value = ["itemVariableId", "itemSelectedVariableId", "itemSelectedPosition", "itemList", "itemResourceId", "itemBindingListener", "itemOnClick"],
     requireAll = false
 )
-fun setRecyclerViewAdapter(
+fun <BINDING : ViewDataBinding> setRecyclerViewAdapter(
     recyclerView: RecyclerView,
     itemVariableId: Int,
     itemSelectedVariableId: Int = 0,
     itemSelectedPosition: Int = -1,
     itemList: List<Nothing>?,
     itemResourceId: Int,
-    itemOnClick: DataBindingRecyclerViewAdapter.OnItemClickListeners<ViewDataBinding, Nothing>?
+    itemBindingListener: BindingListener<BINDING, Nothing>?,
+    itemOnClick: DataBindingRecyclerViewAdapter.OnItemClickListeners<BINDING, Nothing>?
 ) {
     itemList?.let { itemList ->
         var adapter = recyclerView.adapter
         if (adapter == null) {
-            adapter = DataBindingRecyclerViewAdapter<ViewDataBinding, Nothing>(itemVariableId, itemList, itemResourceId)
+            adapter = DataBindingRecyclerViewAdapter<BINDING, Nothing>(itemVariableId, itemList, itemResourceId)
             adapter.setSelectedEnabled(itemSelectedVariableId, itemSelectedPosition)
+            adapter.bindingListener = itemBindingListener
             if (itemOnClick != null) {
                 adapter.setOnItemClickListener(itemOnClick)
             }

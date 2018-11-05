@@ -41,6 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
+            app:itemBindingListener="@{viewModel.bindingListener}"
             app:itemList="@{viewModel.repositoryList}"
             app:itemResourceId="@{@layout/item_repository}"
             app:itemVariableId="@{viewModel.repositoryVariableId}"

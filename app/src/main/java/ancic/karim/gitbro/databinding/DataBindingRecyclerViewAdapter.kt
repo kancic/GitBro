@@ -11,15 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
  * Adapter used for recyclerView with data binding
  * Created by Karim on 6.10.2015..
  */
-open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE>(protected val variableId: Int,
-                                                                                itemList: List<ITEM_TYPE>,
-                                                                                private vararg val listItemResourceViewId: Int) :
-    RecyclerView.Adapter<DataBindingRecyclerViewAdapter.BindingHolder<BINDING>>() {
+open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE : Any>(protected val variableId: Int, itemList: List<ITEM_TYPE>, private vararg val listItemResourceViewId: Int) : RecyclerView.Adapter<DataBindingRecyclerViewAdapter.BindingHolder<BINDING>>(), BindingListener<BINDING, ITEM_TYPE> {
     protected val itemList = ArrayList(itemList)
     protected var selectedVariableId: Int = 0
     protected var selectedItemPosition = -1
 
     private var onItemClickListener: OnItemClickListeners<BINDING, ITEM_TYPE>? = null
+
+    var bindingListener: BindingListener<BINDING, ITEM_TYPE>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingHolder<BINDING> {
         val binding = DataBindingUtil.inflate<BINDING>(
@@ -49,8 +48,8 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE>(
         return item
     }
 
-    protected open fun onBindItem(holder: BindingHolder<BINDING>, item: ITEM_TYPE, position: Int) {
-
+    override fun onBindItem(holder: BindingHolder<BINDING>, item: ITEM_TYPE, position: Int) {
+        bindingListener?.onBindItem(holder, item, position)
     }
 
     protected fun onItemClickListener(holder: BindingHolder<BINDING>, item: ITEM_TYPE): View.OnClickListener {
@@ -104,4 +103,8 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE>(
     }
 
     class BindingHolder<BINDING : ViewDataBinding>(val binding: BINDING) : RecyclerView.ViewHolder(binding.root)
+}
+
+interface BindingListener<BINDING : ViewDataBinding, ITEM_TYPE : Any> {
+    fun onBindItem(holder: DataBindingRecyclerViewAdapter.BindingHolder<BINDING>, item: ITEM_TYPE, position: Int)
 }
