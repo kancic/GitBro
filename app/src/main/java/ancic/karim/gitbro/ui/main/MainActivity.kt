@@ -1,9 +1,7 @@
 package ancic.karim.gitbro.ui.main
 
 import ancic.karim.gitbro.R
-import ancic.karim.gitbro.api.response.Repository
-import ancic.karim.gitbro.databinding.DataBindingRecyclerViewAdapter
-import ancic.karim.gitbro.databinding.ItemRepositoryBinding
+import ancic.karim.gitbro.databinding.item.OnItemClickListener
 import ancic.karim.gitbro.ui.base.BaseActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -16,9 +14,8 @@ class MainActivity : BaseActivity<ViewDataBinding, MainViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.bindingListener.onOwnerAvatarClick = object : DataBindingRecyclerViewAdapter.OnItemClickListeners<ItemRepositoryBinding, Repository> {
-            override fun onItemClick(binding: ItemRepositoryBinding, item: Repository, position: Int) {
-            }
+        viewModel.bindingListener.onOwnerAvatarClick = OnItemClickListener { binding, item, position ->
+
         }
     }
 

@@ -1,5 +1,6 @@
 package ancic.karim.gitbro.databinding
 
+import ancic.karim.gitbro.databinding.item.OnItemClickListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +17,8 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE :
     protected var selectedVariableId: Int = 0
     protected var selectedItemPosition = -1
 
-    private var onItemClickListener: OnItemClickListeners<BINDING, ITEM_TYPE>? = null
-
     var bindingListener: BindingListener<BINDING, ITEM_TYPE>? = null
+    var onItemClickListener: OnItemClickListener<BINDING, ITEM_TYPE>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingHolder<BINDING> {
         val binding = DataBindingUtil.inflate<BINDING>(
@@ -92,14 +92,6 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE :
     fun setSelectedEnabled(selectedVariableId: Int, selectedItemPosition: Int) {
         this.selectedVariableId = selectedVariableId
         this.selectedItemPosition = selectedItemPosition
-    }
-
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListeners<BINDING, ITEM_TYPE>) {
-        this.onItemClickListener = onItemClickListener
-    }
-
-    interface OnItemClickListeners<BINDING : ViewDataBinding, ITEM_TYPE> {
-        fun onItemClick(binding: BINDING, item: ITEM_TYPE, position: Int)
     }
 
     class BindingHolder<BINDING : ViewDataBinding>(val binding: BINDING) : RecyclerView.ViewHolder(binding.root)

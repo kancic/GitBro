@@ -1,5 +1,6 @@
 package ancic.karim.gitbro.databinding
 
+import ancic.karim.gitbro.databinding.item.OnItemClickListener
 import ancic.karim.gitbro.image.ImageManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -39,16 +40,15 @@ fun <BINDING : ViewDataBinding> setRecyclerViewAdapter(
     itemList: List<Nothing>?,
     itemResourceId: Int,
     itemBindingListener: BindingListener<BINDING, Nothing>?,
-    itemOnClick: DataBindingRecyclerViewAdapter.OnItemClickListeners<BINDING, Nothing>?
+    itemOnClick: OnItemClickListener<BINDING, Nothing>?
 ) {
     itemList?.let { itemList ->
         var adapter = recyclerView.adapter
         if (adapter == null) {
-            adapter = DataBindingRecyclerViewAdapter<BINDING, Nothing>(itemVariableId, itemList, itemResourceId)
-            adapter.setSelectedEnabled(itemSelectedVariableId, itemSelectedPosition)
-            adapter.bindingListener = itemBindingListener
-            if (itemOnClick != null) {
-                adapter.setOnItemClickListener(itemOnClick)
+            adapter = DataBindingRecyclerViewAdapter<BINDING, Nothing>(itemVariableId, itemList, itemResourceId).apply {
+                setSelectedEnabled(itemSelectedVariableId, itemSelectedPosition)
+                bindingListener = itemBindingListener
+                onItemClickListener = itemOnClick
             }
             recyclerView.adapter = adapter
         } else if (adapter is DataBindingRecyclerViewAdapter<*, *>) {
