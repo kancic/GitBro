@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
  * Adapter used for recyclerView with data binding
  * Created by Karim on 6.10.2015..
  */
-open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE : Any>(protected val variableId: Int, itemList: List<ITEM_TYPE>, private vararg val listItemResourceViewId: Int) : RecyclerView.Adapter<DataBindingRecyclerViewAdapter.BindingHolder<BINDING>>(), BindingListener<BINDING, ITEM_TYPE> {
+open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM : Any>(protected val variableId: Int, itemList: List<ITEM>, private vararg val listItemResourceViewId: Int) : RecyclerView.Adapter<DataBindingRecyclerViewAdapter.BindingHolder<BINDING>>(), BindingListener<BINDING, ITEM> {
     protected val itemList = ArrayList(itemList)
     protected var selectedVariableId: Int = 0
     protected var selectedItemPosition = -1
 
-    var bindingListener: BindingListener<BINDING, ITEM_TYPE>? = null
-    var onItemClickListener: OnItemClickListener<BINDING, ITEM_TYPE>? = null
+    var bindingListener: BindingListener<BINDING, ITEM>? = null
+    var onItemClickListener: OnItemClickListener<BINDING, ITEM>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingHolder<BINDING> {
         val binding = DataBindingUtil.inflate<BINDING>(
@@ -44,15 +44,15 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE :
         onBindItem(holder, item, position)
     }
 
-    protected open fun onPreBindItem(item: ITEM_TYPE): ITEM_TYPE {
+    protected open fun onPreBindItem(item: ITEM): ITEM {
         return item
     }
 
-    override fun onBindItem(holder: BindingHolder<BINDING>, item: ITEM_TYPE, position: Int) {
+    override fun onBindItem(holder: BindingHolder<BINDING>, item: ITEM, position: Int) {
         bindingListener?.onBindItem(holder, item, position)
     }
 
-    protected fun onItemClickListener(holder: BindingHolder<BINDING>, item: ITEM_TYPE): View.OnClickListener {
+    protected fun onItemClickListener(holder: BindingHolder<BINDING>, item: ITEM): View.OnClickListener {
         return View.OnClickListener {
             val position = holder.adapterPosition
             if (selectedVariableId != 0) {
@@ -73,13 +73,13 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE :
         return itemList.size
     }
 
-    fun update(newItemList: List<ITEM_TYPE>) {
+    fun update(newItemList: List<ITEM>) {
         itemList.clear()
         itemList.addAll(newItemList)
         notifyDataSetChanged()
     }
 
-    fun remove(item: ITEM_TYPE): Int {
+    fun remove(item: ITEM): Int {
         val position = itemList.indexOf(item)
         if (position >= 0) {
             itemList.removeAt(position)
@@ -97,6 +97,6 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM_TYPE :
     class BindingHolder<BINDING : ViewDataBinding>(val binding: BINDING) : RecyclerView.ViewHolder(binding.root)
 }
 
-interface BindingListener<BINDING : ViewDataBinding, ITEM_TYPE : Any> {
-    fun onBindItem(holder: DataBindingRecyclerViewAdapter.BindingHolder<BINDING>, item: ITEM_TYPE, position: Int)
+interface BindingListener<BINDING : ViewDataBinding, ITEM : Any> {
+    fun onBindItem(holder: DataBindingRecyclerViewAdapter.BindingHolder<BINDING>, item: ITEM, position: Int)
 }

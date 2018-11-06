@@ -28,30 +28,32 @@ fun setImageUrl(imageView: ImageView, url: String?, circle: Boolean = false) {
     ImageManager.with(imageView.context).load(url).setCircle(circle).into(imageView)
 }
 
+@Suppress("UNCHECKED_CAST", "NAME_SHADOWING")
 @BindingAdapter(
     value = ["itemVariableId", "itemSelectedVariableId", "itemSelectedPosition", "itemList", "itemResourceId", "itemBindingListener", "itemOnClick"],
     requireAll = false
 )
-fun <BINDING : ViewDataBinding> setRecyclerViewAdapter(
+fun <BINDING : ViewDataBinding, ITEM : Any> setRecyclerViewAdapter(
     recyclerView: RecyclerView,
     itemVariableId: Int,
     itemSelectedVariableId: Int = 0,
     itemSelectedPosition: Int = -1,
-    itemList: List<Nothing>?,
+    itemList: List<ITEM>?,
     itemResourceId: Int,
-    itemBindingListener: BindingListener<BINDING, Nothing>?,
-    itemOnClick: OnItemClickListener<BINDING, Nothing>?
+    itemBindingListener: BindingListener<BINDING, ITEM>?,
+    itemOnClick: OnItemClickListener<BINDING, ITEM>?
 ) {
     itemList?.let { itemList ->
         var adapter = recyclerView.adapter
         if (adapter == null) {
-            adapter = DataBindingRecyclerViewAdapter<BINDING, Nothing>(itemVariableId, itemList, itemResourceId).apply {
+            adapter = DataBindingRecyclerViewAdapter<BINDING, ITEM>(itemVariableId, itemList, itemResourceId).apply {
                 setSelectedEnabled(itemSelectedVariableId, itemSelectedPosition)
                 bindingListener = itemBindingListener
                 onItemClickListener = itemOnClick
             }
             recyclerView.adapter = adapter
         } else if (adapter is DataBindingRecyclerViewAdapter<*, *>) {
+            adapter as DataBindingRecyclerViewAdapter<BINDING, ITEM>
             adapter.update(itemList)
         } else {
             adapter.notifyDataSetChanged()
