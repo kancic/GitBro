@@ -10,7 +10,7 @@ import androidx.arch.core.util.Function
 import androidx.databinding.library.baseAdapters.BR
 
 class MainViewModel(application: Application) : BaseViewModel<MainRepository, BaseRouter>(application, MainRepository(), BaseRouter()) {
-    val repositoryVariableId = BR.repository
+    val repositoryVariableId = LiveField<Int?>(BR.repository)
     val bindingListener = RepositoryBindingListener()
     val searchText = LiveField<String?>()
     val sortText = LiveField<String?>()
