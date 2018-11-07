@@ -28,32 +28,32 @@ class RepositorySearchFragment : BaseFragment<ViewDataBinding, RepositorySearchV
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         when (viewModel.sortText.value) {
-            null -> menu?.findItem(R.id.action_sort_default)?.isChecked = true
-            "stars" -> menu?.findItem(R.id.action_sort_by_stars)?.isChecked = true
-            "forks" -> menu?.findItem(R.id.action_sort_by_forks)?.isChecked = true
-            "updated" -> menu?.findItem(R.id.action_sort_by_updated)?.isChecked = true
+            RepositorySort.DEFAULT -> menu?.findItem(R.id.action_sort_default)?.isChecked = true
+            RepositorySort.STARS -> menu?.findItem(R.id.action_sort_by_stars)?.isChecked = true
+            RepositorySort.FORKS -> menu?.findItem(R.id.action_sort_by_forks)?.isChecked = true
+            RepositorySort.UPDATED -> menu?.findItem(R.id.action_sort_by_updated)?.isChecked = true
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_sort_default -> {
-                viewModel.sortText.value = null
+                viewModel.sortText.value = RepositorySort.DEFAULT
                 item.isChecked = true
                 return true
             }
             R.id.action_sort_by_stars -> {
-                viewModel.sortText.value = "stars"
+                viewModel.sortText.value = RepositorySort.STARS
                 item.isChecked = true
                 return true
             }
             R.id.action_sort_by_forks -> {
-                viewModel.sortText.value = "forks"
+                viewModel.sortText.value = RepositorySort.FORKS
                 item.isChecked = true
                 return true
             }
             R.id.action_sort_by_updated -> {
-                viewModel.sortText.value = "updated"
+                viewModel.sortText.value = RepositorySort.UPDATED
                 item.isChecked = true
                 return true
             }

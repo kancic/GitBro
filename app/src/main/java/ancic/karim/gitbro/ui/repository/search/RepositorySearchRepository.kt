@@ -9,7 +9,13 @@ import androidx.lifecycle.LiveData
 import retrofit2.Call
 
 class RepositorySearchRepository : BaseRepository() {
-    fun getRepositoryList(searchText: String?, sortText: String?): LiveData<List<Repository>?> {
+    fun getRepositoryList(searchText: String?, repositorySort: RepositorySort?): LiveData<List<Repository>?> {
+        val sortText = when (repositorySort) {
+            null, RepositorySort.DEFAULT -> null
+            RepositorySort.STARS -> "stars"
+            RepositorySort.FORKS -> "forks"
+            RepositorySort.UPDATED -> "updated"
+        }
         return executeNetworkRequest(object : NetworkRequest<List<Repository>, SearchRepositoriesResponse> {
             override fun getNetworkCall(): Call<SearchRepositoriesResponse> {
                 return ApiManager.getInstance().service.searchRepositories(searchText, sortText)

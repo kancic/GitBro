@@ -15,8 +15,12 @@ class RepositorySearchViewModel(application: Application) : BaseViewModel<Reposi
     val repositoryVariableId = LiveField<Int?>(BR.repository)
     val bindingListener = RepositorySearchBindingListener()
     val searchText = LiveField<String?>()
-    val sortText = LiveField<String?>()
+    val sortText = LiveField<RepositorySort?>(RepositorySort.DEFAULT)
     val repositoryList = LiveField<List<Repository>>(searchText, sortText, switchMapFunction = Function {
         repository.getRepositoryList(searchText.value, sortText.value)
     })
+}
+
+enum class RepositorySort {
+    DEFAULT, STARS, FORKS, UPDATED
 }
