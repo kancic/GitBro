@@ -30,6 +30,14 @@ abstract class BaseActivity<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
             binding.setVariable(BR.viewModel, viewModel)
             binding.setLifecycleOwner(activity)
         }
+
+        intent?.extras?.also { extras ->
+            onParseIntentExtras(extras)
+        }
+    }
+
+    protected open fun onParseIntentExtras(extras: Bundle) {
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

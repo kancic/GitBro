@@ -1,4 +1,4 @@
-package ancic.karim.gitbro.ui.main
+package ancic.karim.gitbro.ui.repository.search
 
 import ancic.karim.gitbro.api.ApiManager
 import ancic.karim.gitbro.api.NetworkRequest
@@ -8,7 +8,7 @@ import ancic.karim.gitbro.ui.base.BaseRepository
 import androidx.lifecycle.LiveData
 import retrofit2.Call
 
-class MainRepository : BaseRepository() {
+class RepositorySearchRepository : BaseRepository() {
     fun getRepositoryList(searchText: String?, sortText: String?): LiveData<List<Repository>?> {
         return executeNetworkRequest(object : NetworkRequest<List<Repository>, SearchRepositoriesResponse> {
             override fun getNetworkCall(): Call<SearchRepositoriesResponse> {
