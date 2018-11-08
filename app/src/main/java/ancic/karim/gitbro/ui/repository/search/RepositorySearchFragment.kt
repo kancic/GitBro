@@ -27,7 +27,7 @@ class RepositorySearchFragment : BaseFragment<ViewDataBinding, RepositorySearchV
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        when (viewModel.sortText.value) {
+        when (viewModel.repositorySort.value) {
             RepositorySort.DEFAULT -> menu?.findItem(R.id.action_sort_default)?.isChecked = true
             RepositorySort.STARS -> menu?.findItem(R.id.action_sort_by_stars)?.isChecked = true
             RepositorySort.FORKS -> menu?.findItem(R.id.action_sort_by_forks)?.isChecked = true
@@ -38,22 +38,22 @@ class RepositorySearchFragment : BaseFragment<ViewDataBinding, RepositorySearchV
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_sort_default -> {
-                viewModel.sortText.value = RepositorySort.DEFAULT
+                viewModel.repositorySort.value = RepositorySort.DEFAULT
                 item.isChecked = true
                 return true
             }
             R.id.action_sort_by_stars -> {
-                viewModel.sortText.value = RepositorySort.STARS
+                viewModel.repositorySort.value = RepositorySort.STARS
                 item.isChecked = true
                 return true
             }
             R.id.action_sort_by_forks -> {
-                viewModel.sortText.value = RepositorySort.FORKS
+                viewModel.repositorySort.value = RepositorySort.FORKS
                 item.isChecked = true
                 return true
             }
             R.id.action_sort_by_updated -> {
-                viewModel.sortText.value = RepositorySort.UPDATED
+                viewModel.repositorySort.value = RepositorySort.UPDATED
                 item.isChecked = true
                 return true
             }

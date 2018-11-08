@@ -73,9 +73,9 @@ open class DataBindingRecyclerViewAdapter<BINDING : ViewDataBinding, ITEM : Any>
         return itemList.size
     }
 
-    fun update(newItemList: List<ITEM>) {
+    fun update(newItemList: List<ITEM>?) {
         itemList.clear()
-        itemList.addAll(newItemList)
+        newItemList?.let(itemList::addAll)
         notifyDataSetChanged()
     }
 

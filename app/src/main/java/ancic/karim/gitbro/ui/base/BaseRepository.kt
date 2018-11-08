@@ -28,13 +28,14 @@ open class BaseRepository {
         Runnable {
             networkCall.enqueue(object : Callback<API_RESPONSE> {
                 override fun onResponse(call: Call<API_RESPONSE>, response: Response<API_RESPONSE>) {
-                    if (response.isSuccessful && response.body() != null) {
-                        networkResult.value = networkRequest.getResponseFromNetwork(response.body())
+                    networkResult.value = if (response.isSuccessful && response.body() != null) {
+                        networkRequest.getResponseFromNetwork(response.body())
+                    } else {
+                        null
                     }
                 }
 
                 override fun onFailure(call: Call<API_RESPONSE>, t: Throwable) {
-
                 }
             })
         }.also { it ->

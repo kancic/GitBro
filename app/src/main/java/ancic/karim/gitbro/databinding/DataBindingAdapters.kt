@@ -43,19 +43,19 @@ fun <BINDING : ViewDataBinding, ITEM : Any> setRecyclerViewAdapter(
     itemBindingListener: BindingListener<BINDING, ITEM>?,
     itemOnClick: OnItemClickListener<BINDING, ITEM>?
 ) {
-    itemList?.let { itemList ->
-        val adapter = recyclerView.adapter
-        if (adapter == null) {
+    val adapter = recyclerView.adapter
+    when (adapter) {
+        null -> itemList?.apply {
             recyclerView.adapter = DataBindingRecyclerViewAdapter<BINDING, ITEM>(itemVariableId, itemList, itemResourceId).apply {
                 setSelectedEnabled(itemSelectedVariableId, itemSelectedPosition)
                 bindingListener = itemBindingListener
                 onItemClickListener = itemOnClick
             }
-        } else if (adapter is DataBindingRecyclerViewAdapter<*, *>) {
+        }
+        is DataBindingRecyclerViewAdapter<*, *> -> {
             adapter as DataBindingRecyclerViewAdapter<BINDING, ITEM>
             adapter.update(itemList)
-        } else {
-            adapter.notifyDataSetChanged()
         }
+        else -> adapter.notifyDataSetChanged()
     }
 }
