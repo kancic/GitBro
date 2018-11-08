@@ -1,6 +1,7 @@
 package ancic.karim.gitbro.api.response
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class SearchRepositoriesResponse(
     @SerializedName("incomplete_results")
@@ -58,7 +59,7 @@ data class Repository(
     val url: String,
     @SerializedName("watchers_count")
     val watchersCount: Int
-)
+) : Serializable
 
 data class Owner(
     @SerializedName("avatar_url")
@@ -77,4 +78,4 @@ data class Owner(
     val type: String,
     @SerializedName("url")
     val url: String
-)
+) : Serializable

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="ancic.karim.gitbro.ui.repository.details.RepositoryDetailsViewModel" />
     </data>
 
     <FrameLayout
@@ -11,5 +15,8 @@
         android:layout_height="match_parent"
         tools:context=".ui.repository.details.RepositoryDetailsFragment">
 
+        <include
+            layout="@layout/item_repository"
+            app:repository="@{viewModel.repositoryDetails}" />
     </FrameLayout>
 </layout>

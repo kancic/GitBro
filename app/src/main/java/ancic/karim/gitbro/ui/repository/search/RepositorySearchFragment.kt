@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.core.os.bundleOf
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 
@@ -21,7 +22,8 @@ class RepositorySearchFragment : BaseFragment<ViewDataBinding, RepositorySearchV
             findNavController().navigate(R.id.action_repositorySearchFragment_to_userDetailsFragment)
         }
         viewModel.bindingListener.onItemClick = OnItemClickListener { binding, item, _ ->
-            findNavController().navigate(R.id.action_repositorySearchFragment_to_repositoryDetailsFragment)
+            val bundle = bundleOf("repository" to item)
+            findNavController().navigate(R.id.action_repositorySearchFragment_to_repositoryDetailsFragment, bundle)
         }
     }
 

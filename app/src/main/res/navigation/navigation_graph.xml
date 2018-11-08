@@ -30,5 +30,7 @@
         android:id="@+id/repositoryDetailsFragment"
         android:name="ancic.karim.gitbro.ui.repository.details.RepositoryDetailsFragment"
         android:label="fragment_repository_details"
-        tools:layout="@layout/fragment_repository_details" />
+        tools:layout="@layout/fragment_repository_details">
+        <argument android:name="repository" />
+    </fragment>
 </navigation>
