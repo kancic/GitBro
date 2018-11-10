@@ -20,29 +20,51 @@
             android:layout_height="wrap_content"
             tools:context=".ui.repository.details.RepositoryDetailsFragment">
 
-            <TextView
-                android:id="@+id/read_me_content"
+            <include
+                android:id="@+id/repository_details"
+                layout="@layout/item_repository"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/screen_horizontal_margin"
-                android:paddingTop="@dimen/screen_vertical_margin"
-                android:paddingEnd="@dimen/screen_horizontal_margin"
-                android:paddingBottom="@dimen/screen_vertical_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:markdown="@{viewModel.readMeContent}"
-                tools:lines="10"
-                tools:text="@tools:sample/lorem/random" />
+                app:repository="@{viewModel.repositoryDetails}" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/read_me_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/screen_horizontal_margin"
+                android:layout_marginTop="@dimen/screen_vertical_margin"
+                android:layout_marginEnd="@dimen/screen_horizontal_margin"
+                android:layout_marginBottom="@dimen/screen_vertical_margin"
+                android:visibility="@{viewModel.readMeContent != null}"
+                app:contentPaddingBottom="@dimen/screen_vertical_margin"
+                app:contentPaddingLeft="@dimen/screen_horizontal_margin"
+                app:contentPaddingRight="@dimen/screen_horizontal_margin"
+                app:contentPaddingTop="@dimen/screen_vertical_margin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/repository_details"
+                app:layout_constraintVertical_bias="0">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:markdown="@{viewModel.readMeContent}"
+                    tools:lines="10"
+                    tools:text="@tools:sample/lorem" />
+            </androidx.cardview.widget.CardView>
 
             <include
                 layout="@layout/layout_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@id/read_me_content"
-                app:layout_constraintEnd_toEndOf="@id/read_me_content"
-                app:layout_constraintStart_toStartOf="@id/read_me_content"
-                app:layout_constraintTop_toTopOf="@id/read_me_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/repository_details"
                 app:show="@{viewModel.readMeContent == null}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
