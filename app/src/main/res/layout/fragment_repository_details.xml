@@ -10,13 +10,41 @@
             type="ancic.karim.gitbro.ui.repository.details.RepositoryDetailsViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.repository.details.RepositoryDetailsFragment">
+        android:fillViewport="true">
 
-        <include
-            layout="@layout/item_repository"
-            app:repository="@{viewModel.repositoryDetails}" />
-    </FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.repository.details.RepositoryDetailsFragment">
+
+            <TextView
+                android:id="@+id/read_me_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/screen_horizontal_margin"
+                android:paddingTop="@dimen/screen_vertical_margin"
+                android:paddingEnd="@dimen/screen_horizontal_margin"
+                android:paddingBottom="@dimen/screen_vertical_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:markdown="@{viewModel.readMeContent}"
+                tools:lines="10"
+                tools:text="@tools:sample/lorem/random" />
+
+            <include
+                layout="@layout/layout_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/read_me_content"
+                app:layout_constraintEnd_toEndOf="@id/read_me_content"
+                app:layout_constraintStart_toStartOf="@id/read_me_content"
+                app:layout_constraintTop_toTopOf="@id/read_me_content"
+                app:show="@{viewModel.readMeContent == null}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

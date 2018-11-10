@@ -5,9 +5,13 @@ import ancic.karim.gitbro.image.ImageManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import ru.noties.markwon.Markwon
+import ru.noties.markwon.SpannableConfiguration
+import ru.noties.markwon.il.AsyncDrawableLoader
 import java.text.DecimalFormat
 
 @BindingAdapter(value = ["amount"], requireAll = false)
@@ -20,6 +24,14 @@ fun setAmount(textView: TextView, amount: Double) {
         if (textView is EditText) {
             textView.setSelection(selectionStart, selectionEnd)
         }
+    }
+}
+
+@BindingAdapter(value = ["markdown"])
+fun TextView.setMarkdown(markdown: String?) {
+    if (!markdown.isNullOrEmpty()) {
+        val configuration = SpannableConfiguration.builder(context).asyncDrawableLoader(AsyncDrawableLoader.create()).build()
+        Markwon.setMarkdown(this, configuration, markdown)
     }
 }
 
@@ -57,5 +69,14 @@ fun <BINDING : ViewDataBinding, ITEM : Any> setRecyclerViewAdapter(
             adapter.update(itemList)
         }
         else -> adapter.notifyDataSetChanged()
+    }
+}
+
+@BindingAdapter(value = ["show"])
+fun showProgressBar(contentLoadingProgressBar: ContentLoadingProgressBar, show: Boolean?) {
+    if (show == true) {
+        contentLoadingProgressBar.show()
+    } else {
+        contentLoadingProgressBar.hide()
     }
 }

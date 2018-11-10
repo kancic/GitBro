@@ -18,7 +18,7 @@ class RepositorySearchRepository : BaseRepository() {
         }
         return executeNetworkRequest(object : NetworkRequest<List<Repository>, SearchRepositoriesResponse> {
             override fun getNetworkCall(): Call<SearchRepositoriesResponse> {
-                return ApiManager.getInstance().service.searchRepositories(searchText, sortText)
+                return ApiManager.apiService.searchRepositories(searchText, sortText)
             }
 
             override fun getResponseFromNetwork(data: SearchRepositoriesResponse?): List<Repository>? {
