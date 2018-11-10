@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 
 abstract class BaseFragment<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewModel<*, *>> : Fragment() {
+    var title: String? = null
+
     protected lateinit var binding: BINDING
     protected lateinit var viewModel: VIEW_MODEL
 
@@ -61,6 +63,13 @@ abstract class BaseFragment<BINDING : ViewDataBinding, VIEW_MODEL : BaseViewMode
         if (provideOptionsMenuResourceId() != 0) {
             menu?.clear()
             inflater?.inflate(provideOptionsMenuResourceId(), menu)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        title?.let { title ->
+            activity?.title = title
         }
     }
 }
