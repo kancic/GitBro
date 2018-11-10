@@ -7,12 +7,12 @@ data class SearchRepositoriesResponse(
     @SerializedName("incomplete_results")
     val incompleteResults: Boolean,
     @SerializedName("items")
-    val repositoryList: List<Repository>,
+    val repositoryDetailsList: List<RepositoryDetails>,
     @SerializedName("total_count")
     val totalCount: Int
 )
 
-data class Repository(
+data class RepositoryDetails(
     @SerializedName("created_at")
     val createdAt: String,
     @SerializedName("default_branch")

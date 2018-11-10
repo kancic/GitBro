@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="repository"
-            type="ancic.karim.gitbro.api.response.Repository" />
+            name="repositoryDetails"
+            type="ancic.karim.gitbro.api.response.RepositoryDetails" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             android:layout_marginTop="@dimen/screen_vertical_margin"
             android:background="@drawable/avatar_background"
             app:imageCircle="@{true}"
-            app:imageUrl="@{repository.owner.avatarUrl}"
+            app:imageUrl="@{repositoryDetails.owner.avatarUrl}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/screen_horizontal_margin"
             android:layout_marginEnd="@dimen/screen_horizontal_margin"
-            android:text="@{repository.name}"
+            android:text="@{repositoryDetails.name}"
             app:layout_constraintStart_toEndOf="@id/repository_owner_avatar"
             app:layout_constraintTop_toTopOf="@id/repository_owner_avatar"
             tools:text="Name" />
@@ -43,7 +43,7 @@
             android:id="@+id/repository_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{repository.owner.login}"
+            android:text="@{repositoryDetails.owner.login}"
             app:layout_constraintStart_toStartOf="@id/repository_name"
             app:layout_constraintTop_toBottomOf="@id/repository_name"
             tools:text="@tools:sample/full_names" />
@@ -58,9 +58,9 @@
             android:ellipsize="end"
             android:fontFamily="sans-serif-condensed"
             android:maxLines="3"
-            android:text="@{repository.description}"
+            android:text="@{repositoryDetails.description}"
             android:textSize="12sp"
-            android:visibility="@{repository.description != null}"
+            android:visibility="@{repositoryDetails.description != null}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/repository_name"
             app:layout_constraintTop_toBottomOf="@id/repository_owner"
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{repository.language}"
+            android:text="@{repositoryDetails.language}"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@id/repository_name"
             app:layout_constraintTop_toBottomOf="@id/repository_description"
@@ -88,7 +88,7 @@
             android:drawablePadding="2dp"
             android:gravity="center_vertical"
             android:textSize="12sp"
-            app:amount="@{repository.stargazersCount}"
+            app:amount="@{repositoryDetails.stargazersCount}"
             app:layout_constraintBaseline_toBaselineOf="@id/repository_language"
             app:layout_constraintStart_toEndOf="@id/repository_language"
             tools:text="9001" />
@@ -104,7 +104,7 @@
             android:drawablePadding="2dp"
             android:gravity="center_vertical"
             android:textSize="12sp"
-            app:amount="@{repository.forksCount}"
+            app:amount="@{repositoryDetails.forksCount}"
             app:layout_constraintBaseline_toBaselineOf="@id/repository_stars"
             app:layout_constraintStart_toEndOf="@id/repository_stars"
             tools:text="2,815" />
@@ -120,7 +120,7 @@
             android:drawablePadding="4dp"
             android:gravity="center_vertical"
             android:textSize="12sp"
-            app:amount="@{repository.openIssuesCount}"
+            app:amount="@{repositoryDetails.openIssuesCount}"
             app:layout_constraintBaseline_toBaselineOf="@id/repository_forks"
             app:layout_constraintStart_toEndOf="@id/repository_forks"
             tools:text="69" />
