@@ -24,7 +24,9 @@
         android:id="@+id/userDetailsFragment"
         android:name="ancic.karim.gitbro.ui.user.details.UserDetailsFragment"
         android:label="fragment_user_details"
-        tools:layout="@layout/fragment_user_details" />
+        tools:layout="@layout/fragment_user_details">
+        <argument android:name="user" />
+    </fragment>
 
     <fragment
         android:id="@+id/repositoryDetailsFragment"

@@ -1,15 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="ancic.karim.gitbro.ui.user.details.UserDetailsViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.user.details.UserDetailsFragment">
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/user_avatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/screen_vertical_margin"
+            android:background="@drawable/avatar_background"
+            app:imageCircle="@{true}"
+            app:imageUrl="@{viewModel.user.avatarUrl}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.2"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/repository_owner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_horizontal_margin"
+            android:layout_marginTop="@dimen/screen_vertical_margin"
+            android:layout_marginEnd="@dimen/screen_horizontal_margin"
+            android:text="@{viewModel.user.login}"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_avatar"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/label_bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="@dimen/screen_horizontal_margin"
+            android:fontFamily="sans-serif-smallcaps"
+            android:gravity="center"
+            android:text="@{@string/label_bio(viewModel.user.bio)}"
+            android:textSize="12sp"
+            android:visibility="@{viewModel.user.bio != null}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repository_owner"
+            tools:text="@string/label_bio" />
+
+        <View
+            android:id="@+id/divider_1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/screen_vertical_margin"
+            android:background="@color/divider_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_bio"
+            app:layout_constraintWidth_percent="0.6" />
+
+        <TextView
+            android:id="@+id/label_blog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/screen_horizontal_margin"
+            android:layout_marginTop="@dimen/screen_vertical_margin"
+            android:layout_marginEnd="@dimen/screen_horizontal_margin"
+            android:autoLink="web"
+            android:visibility="@{viewModel.user.blog != null}"
+            app:html="@{@string/label_blog(viewModel.user.blog)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider_1"
+            tools:text="@string/label_blog" />
+
+        <TextView
+            android:id="@+id/label_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:autoLink="map"
+            android:visibility="@{viewModel.user.location != null}"
+            app:html="@{@string/label_location(viewModel.user.location)}"
+            app:layout_constraintEnd_toEndOf="@id/label_blog"
+            app:layout_constraintStart_toStartOf="@id/label_blog"
+            app:layout_constraintTop_toBottomOf="@id/label_blog"
+            tools:text="@string/label_location" />
+
+        <TextView
+            android:id="@+id/label_repositories"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:html="@{@string/label_public_repositories(viewModel.user.publicRepos)}"
+            app:layout_constraintEnd_toEndOf="@id/label_blog"
+            app:layout_constraintStart_toStartOf="@id/label_blog"
+            app:layout_constraintTop_toBottomOf="@id/label_location"
+            tools:text="@string/label_public_repositories" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

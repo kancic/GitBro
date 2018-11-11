@@ -8,4 +8,8 @@
     <string name="action_sort_by_updated">Updated</string>
     <string name="label_date_created">Date created: %1$s</string>
     <string name="label_date_updated">Date updated: %1$s</string>
+    <string name="label_bio">\"%1$s\"</string>
+    <string name="label_blog"><![CDATA[<b>Blog:</b> %1$s]]></string>
+    <string name="label_location"><![CDATA[<b>Location:</b> %1$s]]></string>
+    <string name="label_public_repositories"><![CDATA[<b>Repositories:</b> %1$d]]></string>
 </resources>

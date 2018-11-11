@@ -3,12 +3,12 @@ package ancic.karim.gitbro.ui.repository.search
 import ancic.karim.gitbro.R
 import ancic.karim.gitbro.databinding.item.OnItemClickListener
 import ancic.karim.gitbro.ui.base.BaseFragment
+import ancic.karim.gitbro.ui.user.details.UserDetailsFragment
 import ancic.karim.gitbro.ui.repository.details.RepositoryDetailsFragment
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.core.os.bundleOf
 import androidx.databinding.ViewDataBinding
 import androidx.navigation.fragment.findNavController
 
@@ -20,7 +20,7 @@ class RepositorySearchFragment : BaseFragment<ViewDataBinding, RepositorySearchV
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.itemBindingListener.onOwnerAvatarClick = OnItemClickListener { binding, item, _ ->
-            findNavController().navigate(R.id.action_repositorySearchFragment_to_userDetailsFragment)
+            findNavController().navigate(R.id.action_repositorySearchFragment_to_userDetailsFragment, UserDetailsFragment.toBundle(item.owner))
         }
         viewModel.itemBindingListener.onItemClick = OnItemClickListener { binding, item, _ ->
             findNavController().navigate(R.id.action_repositorySearchFragment_to_repositoryDetailsFragment, RepositoryDetailsFragment.toBundle(item))

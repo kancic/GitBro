@@ -19,7 +19,7 @@ class RepositoryDetailsFragment : BaseFragment<ViewDataBinding, RepositoryDetail
 
     override fun onParseArguments(arguments: Bundle) {
         super.onParseArguments(arguments)
-        viewModel.repositoryDetails.value = (arguments.getSerializable(KEY_REPOSITORY_DETAILS) as RepositoryDetails?)?.apply {
+        viewModel.repositoryDetails.value = arguments.getParcelable<RepositoryDetails>(KEY_REPOSITORY_DETAILS)?.apply {
             title = name
         }
     }

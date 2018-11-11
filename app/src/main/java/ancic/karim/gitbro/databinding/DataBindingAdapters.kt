@@ -2,9 +2,13 @@ package ancic.karim.gitbro.databinding
 
 import ancic.karim.gitbro.databinding.item.OnItemClickListener
 import ancic.karim.gitbro.image.ImageManager
+import android.text.Html
+import android.text.TextUtils
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
+import androidx.core.text.parseAsHtml
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ViewDataBinding
@@ -24,6 +28,13 @@ fun setAmount(textView: TextView, amount: Double) {
         if (textView is EditText) {
             textView.setSelection(selectionStart, selectionEnd)
         }
+    }
+}
+
+@BindingAdapter(value = ["html"])
+fun TextView.setHtml(html: String?) {
+    if (!html.isNullOrEmpty()) {
+        text = html.parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT, null, null)
     }
 }
 
