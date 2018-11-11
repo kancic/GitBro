@@ -1,9 +1,13 @@
 package ancic.karim.gitbro.architecture
 
+import android.content.Context
+import android.text.format.DateFormat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun <T> LiveData<T?>.nonNull(): LiveData<T> {
     return MediatorLiveData<T>().apply {
@@ -19,4 +23,11 @@ fun <X, Y> LiveData<X>.map(func: (X) -> Y): MutableLiveData<Y> {
 
 fun <X, Y> LiveData<X>.switchMap(func: (X) -> LiveData<Y>): MutableLiveData<Y> {
     return Transformations.switchMap(this, func) as MutableLiveData<Y>
+}
+
+fun String.formatDate(context: Context): String {
+    val apiDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
+    val date = apiDateFormat.parse(this)
+    val deviceDateFormat = DateFormat.getLongDateFormat(context)
+    return deviceDateFormat.format(date)
 }
