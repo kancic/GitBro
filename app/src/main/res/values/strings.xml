@@ -12,4 +12,5 @@
     <string name="label_blog"><![CDATA[<b>Blog:</b> %1$s]]></string>
     <string name="label_location"><![CDATA[<b>Location:</b> %1$s]]></string>
     <string name="label_public_repositories"><![CDATA[<b>Repositories:</b> %1$d]]></string>
+    <string name="action_open_in_browser">Open in browser</string>
 </resources>

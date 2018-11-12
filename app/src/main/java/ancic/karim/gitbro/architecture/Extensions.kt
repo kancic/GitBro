@@ -1,6 +1,8 @@
 package ancic.karim.gitbro.architecture
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.text.format.DateFormat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -30,4 +32,8 @@ fun String.formatDate(context: Context): String {
     val date = apiDateFormat.parse(this)
     val deviceDateFormat = DateFormat.getLongDateFormat(context)
     return deviceDateFormat.format(date)
+}
+
+fun String.openInBrowser(context: Context) {
+    context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(this)))
 }
